@@ -1,3 +1,6 @@
+// Filipe Vinicius Vieira da Silva RA: 10444828
+// Gabriel Lourenço Zeferino RA: 10722801
+
 #include <stdio.h>  // entrada e saída padrão (ex: printf, scanf)
 #include <stdlib.h> // funções como rand()
 #include <time.h>   // tempo (ex: time, difftime)
@@ -63,7 +66,11 @@ int main()
 }
 
 //* Função que vai sortear uma palavra
-void sortearPalavra(char dicionario_palavras[MAX_PALAVRAS][TAMANHO_MAX_PALAVRA], char sortear_palavra[TAMANHO_MAX_PALAVRA], int total_palavras)
+void sortearPalavra(
+    char dicionario_palavras[MAX_PALAVRAS][TAMANHO_MAX_PALAVRA],
+    char sortear_palavra[TAMANHO_MAX_PALAVRA], 
+    int total_palavras
+)
 {
     int indice = rand() % total_palavras;
     strncpy(sortear_palavra, dicionario_palavras[indice], 5);
@@ -72,22 +79,20 @@ void sortearPalavra(char dicionario_palavras[MAX_PALAVRAS][TAMANHO_MAX_PALAVRA],
 
 
 //* Função que solicita o nome do jogador e imprime o resultado final do jogo
-void mostrarResultadoFinal(char palavra_sorteada[TAMANHO_MAX_PALAVRA], int contador_tentativas, double tempo_decorrido)
+void mostrarResultadoFinal(
+    char palavra_sorteada[TAMANHO_MAX_PALAVRA], 
+    int contador_tentativas, 
+    double tempo_decorrido
+)
 {
     char nome_jogador[30];
-
-    // LIMPEZA DO BUFFER
-    int ch;
-    while ((ch = getchar()) != '\n' && ch != EOF)
-        ;
-
 //* Começa digitando o nome do jogador para em seguida mostrar o resultado final
     printf("Digite o nome do jogador: ");
     fgets(nome_jogador, sizeof(nome_jogador), stdin);
     nome_jogador[strcspn(nome_jogador, "\n")] = '\0'; // Remover o '\n' do final
 
 //* Resultado final
-    printf("Nome do jogador: %s", nome_jogador);
+    printf("Nome do jogador: %s\n", nome_jogador);
     printf("Palavra: %s\n", palavra_sorteada);
     printf("Tentativas: %d\n", contador_tentativas);
     printf("Tempo em segundos: %.2lfs\n", tempo_decorrido);
@@ -97,18 +102,24 @@ void mostrarResultadoFinal(char palavra_sorteada[TAMANHO_MAX_PALAVRA], int conta
 //* Função que calcula o tempo decorrido em segundos
 double calcularTempoDecorrido(time_t inicio)
 {
-    time_t fim;                   // time_t é um tipo de dado definido na biblioteca <time.h> usado para armazenar valores de tempo
+    time_t fim;                   /* time_t é um tipo de dado definido na biblioteca 
+                                    <time.h> usado para armazenar valores de tempo
+                                  */
+
     time(&fim);                   // função do <time.h> que armazena o fim do tempo
     return difftime(fim, inicio); // Calcula a diferença entre dois instantes de tempo
 }
 
 //* Função principal do jogozef
-void jogo(char dicionario_palavras[MAX_PALAVRAS][TAMANHO_MAX_PALAVRA], char palavra_sorteada[TAMANHO_MAX_PALAVRA], int total_palavras)
+void jogo(
+    char dicionario_palavras[MAX_PALAVRAS][TAMANHO_MAX_PALAVRA], 
+    char palavra_sorteada[TAMANHO_MAX_PALAVRA], 
+    int total_palavras)
 {
-    char palavra_usuario[6];     // variável que armazena as palavras que o usuário digitar
-    int contador_tentativas = 0; // variável que armazena a quantidade de tentativas que o usuário teve
-    time_t inicio;               // variáveis para armazenar o inicio e o fim do tempo
-    double tempo_decorrido;      // variável que irá armazenar o tempo decorrido (fazendo o cálculo de fim - inicio)
+    char palavra_usuario[6];     // armazena as palavras que o usuário digitar
+    int contador_tentativas = 0; // armazena a quantidade de tentativas que o usuário teve
+    time_t inicio;               // armazenar o inicio do tempo
+    double tempo_decorrido;      // armazenar o tempo decorrido (fazendo o cálculo de fim - inicio)
 
     time(&inicio); // obtém o tempo inicial
 
@@ -117,8 +128,8 @@ void jogo(char dicionario_palavras[MAX_PALAVRAS][TAMANHO_MAX_PALAVRA], char pala
     while (tentativas > 0)
     {
     //! Início do jogo
-        int letra_encontrada = 0; // Variável que vai detectar se a letra certa foi encontrada (na posição certa ou não)
-        int palavra_valida = 0;   // Variável que vai detectar se a palavra está no dicionário ou não
+        int letra_encontrada = 0; // detectar se a letra certa foi encontrada (na posição certa ou não)
+        int palavra_valida = 0;   // detectar se a palavra está no dicionário ou não
 
         //* Fazer o usuário digitar a palavra que ele acha que é
         printf("Adivinhe a palavra (tentativas restantes: %d): ", tentativas);
