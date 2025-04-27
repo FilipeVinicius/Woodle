@@ -1,5 +1,5 @@
-// Filipe Vinicius Vieira da Silva RA: 10444828
-// Gabriel Lourenço Zeferino RA: 10722801
+// Filipe Vinicius
+// Gabriel Lourenço 
 
 #include <stdio.h>  // entrada e saída padrão (ex: printf, scanf)
 #include <stdlib.h> // funções como rand()
